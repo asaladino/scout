@@ -21,6 +21,10 @@ type Progress = {
   urlsPool: number
 };
 
+type Event = {
+  target: { value: string }
+};
+
 export default class Home extends Component<Props, Progress> {
   props: Props;
 
@@ -82,7 +86,7 @@ export default class Home extends Component<Props, Progress> {
     }
   };
 
-  setDomain = (event: any) => {
+  setDomain = (event: Event) => {
     this.setState({
       domain: event.target.value
     });
