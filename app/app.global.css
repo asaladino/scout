@@ -2,7 +2,8 @@
  * @NOTE: Prepend a `~` to css file paths that are in your node_modules
  *        See https://github.com/webpack-contrib/sass-loader#imports
  */
-@import '~@fortawesome/fontawesome-free/css/all.css';
+
+/* @import '~@fortawesome/fontawesome-free/css/all.css';
 
 body {
   position: relative;
@@ -44,4 +45,4 @@ a:hover {
   opacity: 1;
   text-decoration: none;
   cursor: pointer;
-}
+} */
