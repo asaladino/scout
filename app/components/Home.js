@@ -5,6 +5,10 @@ import { FolderOpen } from '@material-ui/icons';
 
 import IndexController from 'site-index/lib/Controller/IndexController';
 import IndexArgs from 'site-index/lib/Model/Args';
+
+import ContentController from 'site-content/lib/Controller/ContentController';
+import ContentArgs from 'site-content/lib/Model/Args';
+
 import FileDetails from 'site-index/lib/Model/FileDetails';
 
 import electron from 'electron';
@@ -41,19 +45,21 @@ export default class Home extends Component<Props, Progress> {
       taskStatus: ''
     };
     this.startIndex = this.startIndex.bind(this);
+    this.startContents = this.startContents.bind(this);
     this.setDomain = this.setDomain.bind(this);
   }
 
   startIndex = () => {
     const { domain, output } = this.state;
     this.setState({ overStatus: `Indexing ${domain}` });
-    const indexArgs = new IndexArgs({
+    const args = new IndexArgs({
       domain,
       output: new FileDetails(output),
-      verbose: false
+      verbose: false,
+      html: true
     });
-    const indexController = new IndexController(indexArgs);
-    indexController
+    const controller = new IndexController(args);
+    controller
       .start((event, progress: Progress) => {
         if (progress) {
           this.setState({
@@ -70,10 +76,41 @@ export default class Home extends Component<Props, Progress> {
           taskTotal: 100,
           taskCompleted: 100
         });
+        this.startContents();
         return true;
       })
       .catch(() => {
         this.setState({ overStatus: `Error indexing ${domain}` });
+      });
+  };
+
+  startContents = () => {
+    const { domain, output } = this.state;
+    this.setState({ overStatus: `Contents ${domain}` });
+    const args = new ContentArgs({
+      domain,
+      output: new FileDetails(output),
+      verbose: false
+    });
+    console.log(args);
+    const controller = new ContentController(args);
+    controller
+      .start((event, progress: Progress) => {
+        console.log(progress);
+        if (progress) {
+        }
+      })
+      .then(() => {
+        this.setState({
+          overStatus: `Done extracting contents ${domain}`,
+          taskStatus: '',
+          taskTotal: 100,
+          taskCompleted: 100
+        });
+        return true;
+      })
+      .catch(() => {
+        this.setState({ overStatus: `Error extracting contents ${domain}` });
       });
   };
 
