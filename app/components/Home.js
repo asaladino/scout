@@ -19,26 +19,43 @@ import styles from './Home.css';
 
 type Props = {};
 
-type Progress = {
+type State = {
+  domain: string,
+  output: string,
+  overallCompleted: number,
+  overallTotal: number,
+  overStatus: string,
+  taskCompleted: number,
+  taskTotal: number,
+  taskStatus: string
+};
+
+type ProgressIndex = {
   url: { url: string },
   urls: number,
   urlsPool: number
+};
+
+type Progress = {
+  url: { url: string },
+  total: number,
+  progress: number
 };
 
 type Event = {
   target: { value: string }
 };
 
-export default class Home extends Component<Props, Progress> {
+export default class Home extends Component<Props, State> {
   props: Props;
 
   constructor(props: Props) {
     super(props);
     this.state = {
-      domain: '',
-      output: '',
+      domain: 'codingsimply.com',
+      output: 'C:\\Users\\Adam\\Documents\\programming\\reports',
       overallCompleted: 0,
-      overallTotal: 6,
+      overallTotal: 2,
       overStatus: '',
       taskCompleted: 0,
       taskTotal: 100,
@@ -60,9 +77,10 @@ export default class Home extends Component<Props, Progress> {
     });
     const controller = new IndexController(args);
     controller
-      .start((event, progress: Progress) => {
+      .start((event, progress: ProgressIndex) => {
         if (progress) {
           this.setState({
+            overallCompleted: 0,
             taskStatus: `${progress.url.url}`,
             taskTotal: progress.urls + progress.urlsPool,
             taskCompleted: progress.urls
@@ -72,6 +90,7 @@ export default class Home extends Component<Props, Progress> {
       .then(() => {
         this.setState({
           overStatus: `Done indexing ${domain}`,
+          overallCompleted: 1,
           taskStatus: '',
           taskTotal: 100,
           taskCompleted: 100
@@ -92,17 +111,26 @@ export default class Home extends Component<Props, Progress> {
       output: new FileDetails(output),
       verbose: false
     });
-    console.log(args);
     const controller = new ContentController(args);
     controller
       .start((event, progress: Progress) => {
-        console.log(progress);
         if (progress) {
+          let message = { url: '' };
+          if (progress.url !== null) {
+            const { url } = progress;
+            message = url;
+          }
+          this.setState({
+            taskStatus: `${message.url}`,
+            taskTotal: progress.total,
+            taskCompleted: progress.progress
+          });
         }
       })
       .then(() => {
         this.setState({
           overStatus: `Done extracting contents ${domain}`,
+          overallCompleted: 2,
           taskStatus: '',
           taskTotal: 100,
           taskCompleted: 100
@@ -131,6 +159,7 @@ export default class Home extends Component<Props, Progress> {
 
   render = () => {
     const {
+      domain,
       output,
       overallCompleted,
       overallTotal,
@@ -148,6 +177,7 @@ export default class Home extends Component<Props, Progress> {
           <Grid item xs={8}>
             <TextField
               fullWidth
+              value={domain}
               type="text"
               onChange={this.setDomain}
               label="Domain"
@@ -179,14 +209,14 @@ export default class Home extends Component<Props, Progress> {
             <div>{overStatus}</div>
             <LinearProgress
               variant="determinate"
-              value={overallCompleted}
-              valueBuffer={overallTotal}
+              value={(() =>
+                Math.min((overallCompleted / overallTotal) * 100))()}
             />
             <br />
             <LinearProgress
               color="secondary"
               variant="determinate"
-              value={taskCompleted}
+              value={(() => Math.min((taskCompleted / taskTotal) * 100))()}
               valueBuffer={taskTotal}
             />
             <div>{taskStatus}</div>
