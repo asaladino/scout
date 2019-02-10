@@ -3,20 +3,24 @@ import React, { Component } from 'react';
 import { Grid, LinearProgress, Button, TextField } from '@material-ui/core';
 import { FolderOpen } from '@material-ui/icons';
 
-import electron from 'electron';
-
 type Props = {};
 
-type State = {};
+type State = {}
 
-export default class Home extends Component<Props, State> {
+export default BrokenLinks extends Component<Props, State> {
     props: Props;
+
+    constructor(props: Props) {
+        this.props = props;
+    }
 
     render = () => {
         return (
-            <div data-tid="container">
-                Home. Should have a button and list to load the most recent reports workspace.
+            <div>
+                <div>toolbar</div>
+                <div>menu</div>
+                <div>BrokeLinks</div>
             </div>
         );
-    };
+    }
 }
