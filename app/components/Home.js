@@ -1,9 +1,8 @@
 // @flow
 import React, { Component } from 'react';
-import { Grid, LinearProgress, Button, TextField } from '@material-ui/core';
-import { FolderOpen } from '@material-ui/icons';
-
-import electron from 'electron';
+import { Button } from '@material-ui/core';
+import Link from 'react-router-dom/es/Link';
+import routes from '../constants/routes';
 
 type Props = {};
 
@@ -12,11 +11,20 @@ type State = {};
 export default class Home extends Component<Props, State> {
     props: Props;
 
-    render = () => {
-        return (
-            <div data-tid="container">
-                Home. Should have a button and list to load the most recent reports workspace.
-            </div>
-        );
-    };
+    render = () => (
+        <div data-tid="container">
+            <p>
+                Home. Should have a button and list to load the most recent
+                reports workspace.
+            </p>
+            <Button
+                component={Link}
+                variant="contained"
+                type="button"
+                to={routes.SCAN}
+            >
+                Scan
+            </Button>
+        </div>
+    );
 }

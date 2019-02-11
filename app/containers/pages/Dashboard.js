@@ -5,14 +5,10 @@ import { FolderOpen } from '@material-ui/icons';
 
 type Props = {};
 
-type State = {}
+type State = {};
 
-export default Dashboard extends Component<Props, State> {
+export default class Dashboard extends Component<Props, State> {
     props: Props;
-
-    constructor(props: Props) {
-        this.props = props;
-    }
 
     render = () => {
         return (

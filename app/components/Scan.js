@@ -169,9 +169,6 @@ export default class Scan extends Component<Props, State> {
         return (
             <div data-tid="container">
                 <Grid container spacing={16}>
-                    <Grid item xs={12}>
-                        <h2>Scan a site</h2>
-                    </Grid>
                     <Grid item xs={8}>
                         <TextField
                             fullWidth
