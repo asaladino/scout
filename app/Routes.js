@@ -6,7 +6,7 @@ import App from './containers/App';
 import A11y from './containers/pages/A11y';
 import BrokenLinks from './containers/pages/BrokenLinks';
 import Dashboard from './containers/pages/Dashboard';
-import Home from './containers/pages/Home';
+import Home from './containers/pages/HomePage';
 import Lighthouse from './containers/pages/Lighthouse';
 import ScanPage from './containers/pages/ScanPage';
 import Settings from './containers/pages/Settings';

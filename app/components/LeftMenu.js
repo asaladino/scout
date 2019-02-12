@@ -19,7 +19,7 @@ import {
 import Link from 'react-router-dom/es/Link';
 import routes from '../constants/routes';
 
-const drawerWidth = 240;
+const drawerWidth = 280;
 
 const styles = theme => ({
     root: {
@@ -83,7 +83,19 @@ class LeftMenu extends Component<Props, State> {
                         <ListItemIcon>
                             <FlashOn />
                         </ListItemIcon>
-                        <ListItemText primary="Lighthouse" />
+                        <ListItemText primary="Best Practices" />
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <FlashOn />
+                        </ListItemIcon>
+                        <ListItemText primary="Progressive Web App" />
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <FlashOn />
+                        </ListItemIcon>
+                        <ListItemText primary="SEO" />
                     </ListItem>
                 </List>
                 <Divider />
@@ -102,7 +114,7 @@ class LeftMenu extends Component<Props, State> {
                         <ListItemIcon>
                             <Settings />
                         </ListItemIcon>
-                        <ListItemText primary="Settings" />
+                        <ListItemText primary="Options" />
                     </ListItem>
                 </List>
             </Drawer>
