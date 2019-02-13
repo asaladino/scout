@@ -8,6 +8,10 @@
 <PROJECT_ROOT>/dll/.*
 <PROJECT_ROOT>/release/.*
 <PROJECT_ROOT>/git/.*
+<PROJECT_ROOT>/.github/.*
+<PROJECT_ROOT>/.vscode/.*
+<PROJECT_ROOT>/config/.*
+<PROJECT_ROOT>/docs/.*
 
 [include]
 
