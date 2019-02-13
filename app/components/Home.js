@@ -1,161 +1,162 @@
 // @flow
 import React, { Component } from 'react';
-import { Grid, LinearProgress, Button, TextField } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { Button } from '@material-ui/core';
+import Link from 'react-router-dom/es/Link';
+
 import { FolderOpen } from '@material-ui/icons';
-
-import IndexController from 'site-index/lib/Controller/IndexController';
-import IndexArgs from 'site-index/lib/Model/Args';
-import FileDetails from 'site-index/lib/Model/FileDetails';
-
+import { withStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import MenuList from '@material-ui/core/MenuList';
+import MenuItem from '@material-ui/core/MenuItem';
 import electron from 'electron';
+import { Redirect } from 'react-router';
+import routes from '../constants/routes';
+import actions from '../constants/actions';
 
-// import { Link } from 'react-router-dom';
-// import routes from '../constants/routes';
-import styles from './Home.css';
-
-type Props = {};
-
-type Progress = {
-  url: { url: string },
-  urls: number,
-  urlsPool: number
+type Props = {
+    dispatch: any => void
 };
 
-type Event = {
-  target: { value: string }
-};
+type State = {};
 
-export default class Home extends Component<Props, Progress> {
-  props: Props;
-
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      domain: '',
-      output: '',
-      overallCompleted: 0,
-      overallTotal: 6,
-      overStatus: '',
-      taskCompleted: 0,
-      taskTotal: 100,
-      taskStatus: ''
-    };
-    this.startIndex = this.startIndex.bind(this);
-    this.setDomain = this.setDomain.bind(this);
-  }
-
-  startIndex = () => {
-    const { domain, output } = this.state;
-    this.setState({ overStatus: `Indexing ${domain}` });
-    const indexArgs = new IndexArgs({
-      domain,
-      output: new FileDetails(output),
-      verbose: false
-    });
-    const indexController = new IndexController(indexArgs);
-    indexController
-      .start((event, progress: Progress) => {
-        if (progress) {
-          this.setState({
-            taskStatus: `${progress.url.url}`,
-            taskTotal: progress.urls + progress.urlsPool,
-            taskCompleted: progress.urls
-          });
-        }
-      })
-      .then(() => {
-        this.setState({
-          overStatus: `Done indexing ${domain}`,
-          taskStatus: '',
-          taskTotal: 100,
-          taskCompleted: 100
-        });
-        return true;
-      })
-      .catch(() => {
-        this.setState({ overStatus: `Error indexing ${domain}` });
-      });
-  };
-
-  outputFolder = () => {
-    const output = electron.remote.dialog.showOpenDialog({
-      properties: ['openDirectory']
-    });
-    if (output) {
-      this.setState({ output: output[0] });
+const styles = theme => ({
+    root: {
+        position: 'absolute',
+        height: '100%',
+        width: '100%'
+    },
+    paper: {
+        padding: theme.spacing.unit * 2,
+        color: theme.palette.text.secondary,
+        width: 600,
+        height: 400,
+        margin: 'auto',
+        position: 'absolute',
+        top: '50%',
+        left: '50%',
+        marginLeft: -300,
+        marginTop: -200
+    },
+    header: {
+        marginTop: theme.spacing.unit * 6,
+        marginBottom: theme.spacing.unit * 6,
+        textAlign: 'center'
+    },
+    options: {
+        width: '100%'
     }
-  };
+});
 
-  setDomain = (event: Event) => {
-    this.setState({
-      domain: event.target.value
-    });
-  };
-
-  render = () => {
-    const {
-      output,
-      overallCompleted,
-      overallTotal,
-      overStatus,
-      taskCompleted,
-      taskTotal,
-      taskStatus
-    } = this.state;
-    return (
-      <div className={styles.container} data-tid="container">
-        <Grid container spacing={16}>
-          <Grid item xs={12}>
-            <h2>Scan a site</h2>
-          </Grid>
-          <Grid item xs={8}>
-            <TextField
-              fullWidth
-              type="text"
-              onChange={this.setDomain}
-              label="Domain"
-            />
-          </Grid>
-          <Grid item xs={8}>
-            <TextField
-              fullWidth
-              type="text"
-              value={output}
-              label="Output Folder"
-            />
-          </Grid>
-          <Grid item xs={4}>
-            <Button
-              onClick={this.outputFolder}
-              variant="contained"
-              type="button"
-            >
-              <FolderOpen />
-            </Button>
-          </Grid>
-          <Grid item xs={12}>
-            <Button onClick={this.startIndex} variant="contained" type="button">
-              Start Scan
-            </Button>
-          </Grid>
-          <Grid item xs={12}>
-            <div>{overStatus}</div>
-            <LinearProgress
-              variant="determinate"
-              value={overallCompleted}
-              valueBuffer={overallTotal}
-            />
-            <br />
-            <LinearProgress
-              color="secondary"
-              variant="determinate"
-              value={taskCompleted}
-              valueBuffer={taskTotal}
-            />
-            <div>{taskStatus}</div>
-          </Grid>
-        </Grid>
-      </div>
+function generate(element) {
+    return [0, 1, 2].map(value =>
+        React.cloneElement(element, {
+            key: value
+        })
     );
-  };
 }
+
+class Home extends Component<Props, State> {
+    props: Props;
+
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            dense: false,
+            secondary: false
+        };
+        this.outputFolder = this.outputFolder.bind(this);
+    }
+
+    outputFolder = () => {
+        const output = electron.remote.dialog.showOpenDialog({
+            properties: ['openDirectory']
+        });
+        if (output) {
+            const { SET_FOLDER } = actions.project;
+            this.props.dispatch({
+                type: SET_FOLDER,
+                data: { folder: output[0] }
+            });
+        }
+    };
+
+    render = () => {
+        const { classes, project } = this.props;
+        const { dense, secondary } = this.state;
+
+        if (project.folder !== '') {
+            //return <Redirect to={routes.SCAN} />;
+        }
+
+        return (
+            <div className={classes.root}>
+                <Paper className={classes.paper}>
+                    <Typography
+                        variant="h4"
+                        component="h3"
+                        className={classes.header}
+                    >
+                        Welcome to Scout
+                    </Typography>
+                    <Grid container spacing={8}>
+                        <Grid item xs={6}>
+                            <div className={classes.demo}>
+                                <MenuList dense={dense}>
+                                    {generate(
+                                        <MenuItem>
+                                            <ListItemText
+                                                primary="Project "
+                                                secondary={
+                                                    secondary
+                                                        ? 'Secondary text'
+                                                        : null
+                                                }
+                                            />
+                                        </MenuItem>
+                                    )}
+                                </MenuList>
+                            </div>
+                        </Grid>
+
+                        <Grid item xs={6}>
+                            <List>
+                                <ListItem>
+                                    <Button
+                                        onClick={this.outputFolder}
+                                        variant="contained"
+                                        type="button"
+                                        className={classes.options}
+                                    >
+                                        <FolderOpen />
+                                        Open Project Folder...
+                                    </Button>
+                                </ListItem>
+                                <ListItem>
+                                    <Button
+                                        component={Link}
+                                        variant="contained"
+                                        type="button"
+                                        to={routes.SCAN}
+                                        className={classes.options}
+                                    >
+                                        Scan
+                                    </Button>
+                                </ListItem>
+                            </List>
+                        </Grid>
+                    </Grid>
+                </Paper>
+            </div>
+        );
+    };
+}
+
+export default connect(state => ({
+    project: state.project
+}))(withStyles(styles)(Home));

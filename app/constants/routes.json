@@ -1,4 +1,9 @@
 {
   "HOME": "/",
-  "COUNTER": "/counter"
+  "SETTINGS": "/settings",
+  "A11Y": "/a11y",
+  "BROKEN_LINKS": "/broken_links",
+  "DASHBOARD": "/dashboard",
+  "LIGHTHOUSE": "/lighthouse",
+  "SCAN": "/scan"
 }
