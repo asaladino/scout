@@ -1,9 +1,10 @@
 // @flow
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
 import Link from 'react-router-dom/es/Link';
 
-import PropTypes from 'prop-types';
+import { FolderOpen } from '@material-ui/icons';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
@@ -11,9 +12,16 @@ import Grid from '@material-ui/core/Grid';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import MenuList from '@material-ui/core/MenuList';
+import MenuItem from '@material-ui/core/MenuItem';
+import electron from 'electron';
+import { Redirect } from 'react-router';
 import routes from '../constants/routes';
+import actions from '../constants/actions';
 
-type Props = {};
+type Props = {
+    dispatch: any => void
+};
 
 type State = {};
 
@@ -34,6 +42,14 @@ const styles = theme => ({
         left: '50%',
         marginLeft: -300,
         marginTop: -200
+    },
+    header: {
+        marginTop: theme.spacing.unit * 6,
+        marginBottom: theme.spacing.unit * 6,
+        textAlign: 'center'
+    },
+    options: {
+        width: '100%'
     }
 });
 
@@ -48,60 +64,91 @@ function generate(element) {
 class Home extends Component<Props, State> {
     props: Props;
 
-    state = {
-        dense: false,
-        secondary: false
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+            dense: false,
+            secondary: false
+        };
+        this.outputFolder = this.outputFolder.bind(this);
+    }
+
+    outputFolder = () => {
+        const output = electron.remote.dialog.showOpenDialog({
+            properties: ['openDirectory']
+        });
+        if (output) {
+            const { SET_FOLDER } = actions.project;
+            this.props.dispatch({
+                type: SET_FOLDER,
+                data: { folder: output[0] }
+            });
+        }
     };
 
     render = () => {
-        const { classes } = this.props;
+        const { classes, project } = this.props;
         const { dense, secondary } = this.state;
+
+        if (project.folder !== '') {
+            //return <Redirect to={routes.SCAN} />;
+        }
 
         return (
             <div className={classes.root}>
                 <Paper className={classes.paper}>
-                    <Typography variant="h4" component="h3">
+                    <Typography
+                        variant="h4"
+                        component="h3"
+                        className={classes.header}
+                    >
                         Welcome to Scout
                     </Typography>
-                    <Grid container>
-                        <Grid item md={6}>
-                            <Typography variant="h6" className={classes.title}>
-                                Previous Projects
-                            </Typography>
+                    <Grid container spacing={8}>
+                        <Grid item xs={6}>
                             <div className={classes.demo}>
-                                <List dense={dense}>
+                                <MenuList dense={dense}>
                                     {generate(
-                                        <ListItem>
+                                        <MenuItem>
                                             <ListItemText
-                                                primary="Single-line item"
+                                                primary="Project "
                                                 secondary={
                                                     secondary
                                                         ? 'Secondary text'
                                                         : null
                                                 }
                                             />
-                                        </ListItem>
+                                        </MenuItem>
                                     )}
-                                </List>
+                                </MenuList>
                             </div>
                         </Grid>
 
-                        <Grid item xs={6} md={6}>
-                            <Button
-                                variant="contained"
-                                type="button"
-                            >
-                                Open Project Folder...
-                            </Button>
-                            <hr/>
-                            <Button
-                                component={Link}
-                                variant="contained"
-                                type="button"
-                                to={routes.SCAN}
-                            >
-                                Scan
-                            </Button>
+                        <Grid item xs={6}>
+                            <List>
+                                <ListItem>
+                                    <Button
+                                        onClick={this.outputFolder}
+                                        variant="contained"
+                                        type="button"
+                                        className={classes.options}
+                                    >
+                                        <FolderOpen />
+                                        Open Project Folder...
+                                    </Button>
+                                </ListItem>
+                                <ListItem>
+                                    <Button
+                                        component={Link}
+                                        variant="contained"
+                                        type="button"
+                                        to={routes.SCAN}
+                                        className={classes.options}
+                                    >
+                                        Scan
+                                    </Button>
+                                </ListItem>
+                            </List>
                         </Grid>
                     </Grid>
                 </Paper>
@@ -110,4 +157,6 @@ class Home extends Component<Props, State> {
     };
 }
 
-export default withStyles(styles)(Home);
+export default connect(state => ({
+    project: state.project
+}))(withStyles(styles)(Home));
