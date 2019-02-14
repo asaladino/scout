@@ -1,7 +1,12 @@
 // @flow
 import React, { Component } from 'react';
-import { Grid, LinearProgress, Button, TextField } from '@material-ui/core';
-import { FolderOpen } from '@material-ui/icons';
+import {
+    Grid,
+    LinearProgress,
+    Button,
+    TextField,
+    withStyles
+} from '@material-ui/core';
 
 import IndexController from 'site-index/lib/Controller/IndexController';
 import IndexArgs from 'site-index/lib/Model/Args';
@@ -11,13 +16,13 @@ import ContentArgs from 'site-content/lib/Model/Args';
 
 import FileDetails from 'site-index/lib/Model/FileDetails';
 
-import electron from 'electron';
+import { connect } from 'react-redux';
+
+import PropTypes from 'prop-types';
 
 type Props = {};
 
 type State = {
-    domain: string,
-    output: string,
     overallCompleted: number,
     overallTotal: number,
     overStatus: string,
@@ -42,14 +47,14 @@ type Event = {
     target: { value: string }
 };
 
-export default class Scan extends Component<Props, State> {
+const styles = theme => ({});
+
+class Scan extends Component<Props, State> {
     props: Props;
 
     constructor(props: Props) {
         super(props);
         this.state = {
-            domain: 'codingsimply.com',
-            output: 'C:\\Users\\Adam\\Documents\\programming\\reports',
             overallCompleted: 0,
             overallTotal: 2,
             overStatus: '',
@@ -59,11 +64,10 @@ export default class Scan extends Component<Props, State> {
         };
         this.startIndex = this.startIndex.bind(this);
         this.startContents = this.startContents.bind(this);
-        this.setDomain = this.setDomain.bind(this);
     }
 
     startIndex = () => {
-        const { domain, output } = this.state;
+        const { domain, output } = this.props.project;
         this.setState({ overStatus: `Indexing ${domain}` });
         const args = new IndexArgs({
             domain,
@@ -100,7 +104,7 @@ export default class Scan extends Component<Props, State> {
     };
 
     startContents = () => {
-        const { domain, output } = this.state;
+        const { domain, output } = this.props.project;
         this.setState({ overStatus: `Contents ${domain}` });
         const args = new ContentArgs({
             domain,
@@ -140,15 +144,6 @@ export default class Scan extends Component<Props, State> {
             });
     };
 
-    outputFolder = () => {
-        const output = electron.remote.dialog.showOpenDialog({
-            properties: ['openDirectory']
-        });
-        if (output) {
-            this.setState({ output: output[0] });
-        }
-    };
-
     setDomain = (event: Event) => {
         this.setState({
             domain: event.target.value
@@ -157,8 +152,6 @@ export default class Scan extends Component<Props, State> {
 
     render = () => {
         const {
-            domain,
-            output,
             overallCompleted,
             overallTotal,
             overStatus,
@@ -166,6 +159,7 @@ export default class Scan extends Component<Props, State> {
             taskTotal,
             taskStatus
         } = this.state;
+        const {domain, folder} = this.props.project;
         return (
             <div data-tid="container">
                 <Grid container spacing={16}>
@@ -174,7 +168,6 @@ export default class Scan extends Component<Props, State> {
                             fullWidth
                             value={domain}
                             type="text"
-                            onChange={this.setDomain}
                             label="Domain"
                         />
                     </Grid>
@@ -182,18 +175,9 @@ export default class Scan extends Component<Props, State> {
                         <TextField
                             fullWidth
                             type="text"
-                            value={output}
+                            value={folder}
                             label="Output Folder"
                         />
-                    </Grid>
-                    <Grid item xs={4}>
-                        <Button
-                            onClick={this.outputFolder}
-                            variant="contained"
-                            type="button"
-                        >
-                            <FolderOpen />
-                        </Button>
                     </Grid>
                     <Grid item xs={12}>
                         <Button
@@ -228,3 +212,11 @@ export default class Scan extends Component<Props, State> {
         );
     };
 }
+
+Scan.propTypes = {
+    classes: PropTypes.object.isRequired
+};
+
+export default connect(state => ({
+    project: state.project
+}))(withStyles(styles)(Scan));

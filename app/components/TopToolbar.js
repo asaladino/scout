@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import InputBase from '@material-ui/core/InputBase';
 import { fade } from '@material-ui/core/styles/colorManipulator';
 import { withStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import FilledInput from '@material-ui/core/FilledInput';
+import MenuItem from '@material-ui/core/MenuItem';
+import { Redirect } from 'react-router';
+import routes from '../constants/routes';
+import actions from '../constants/actions';
 
 type Props = {};
 type State = {};
@@ -57,25 +61,37 @@ const styles = theme => ({
         color: 'inherit',
         width: '100%'
     },
+    formControl: {
+        margin: theme.spacing.unit,
+        minWidth: 120
+    },
     inputInput: {
-        paddingTop: theme.spacing.unit,
-        paddingRight: theme.spacing.unit,
-        paddingBottom: theme.spacing.unit,
-        paddingLeft: theme.spacing.unit * 10,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            width: 120,
-            '&:focus': {
-                width: 200
+        MuiFilledInput: {
+            input: {
+                padding: 0
             }
         }
     }
 });
 
 class TopToolbar extends Component<Props, State> {
+    constructor(props: Props) {
+        super(props);
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange = event => {
+        this.props.dispatch({
+            type: actions.project.SET_DOMAIN,
+            data: { domain: event.target.value }
+        });
+    };
+
     render = () => {
-        const { classes } = this.props;
+        const { classes, project } = this.props;
+        if (project.folder === '') {
+            return <Redirect to={routes.HOME} />;
+        }
         return (
             <div className={classes.root}>
                 <AppBar position="fixed" className={classes.appBar}>
@@ -89,17 +105,28 @@ class TopToolbar extends Component<Props, State> {
                             Workspace Name
                         </Typography>
                         <div className={classes.grow} />
-                        <div className={classes.search}>
-                            <div className={classes.searchIcon}>
-                                <SearchIcon />
-                            </div>
-                            <InputBase
-                                placeholder="Search…"
-                                classes={{
-                                    root: classes.inputRoot,
-                                    input: classes.inputInput
-                                }}
-                            />
+                        <div>
+                            <FormControl
+                                variant="standard"
+                                className={classes.formControl}
+                            >
+                                <Select
+                                    value={project.domain}
+                                    onChange={this.handleChange}
+                                    className={classes.inputInput}
+                                    input={
+                                        <FilledInput
+                                            name="domain"
+                                        />
+                                    }
+                                >
+                                    {project.domains.map(domain => (
+                                        <MenuItem key={domain} value={domain}>
+                                            {domain}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
                         </div>
                     </Toolbar>
                 </AppBar>
@@ -112,4 +139,6 @@ TopToolbar.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(TopToolbar);
+export default connect(state => ({
+    project: state.project
+}))(withStyles(styles)(TopToolbar));
