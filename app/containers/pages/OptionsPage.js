@@ -7,7 +7,7 @@ type Props = {};
 
 type State = {};
 
-export default class Settings extends Component<Props, State> {
+export default class OptionsPage extends Component<Props, State> {
     props: Props;
 
     render = () => {

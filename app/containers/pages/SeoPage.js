@@ -7,7 +7,7 @@ type Props = {};
 
 type State = {};
 
-export default class Dashboard extends Component<Props, State> {
+export default class SeoPage extends Component<Props, State> {
     props: Props;
 
     render = () => {
@@ -15,7 +15,7 @@ export default class Dashboard extends Component<Props, State> {
             <div>
                 <div>toolbar</div>
                 <div>menu</div>
-                <div>Dashboard</div>
+                <div>Accessibility</div>
             </div>
         );
     }

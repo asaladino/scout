@@ -7,7 +7,7 @@ type Props = {};
 
 type State = {};
 
-export default class A11y extends Component<Props, State> {
+export default class DashboardPage extends Component<Props, State> {
     props: Props;
 
     render = () => {
@@ -15,7 +15,7 @@ export default class A11y extends Component<Props, State> {
             <div>
                 <div>toolbar</div>
                 <div>menu</div>
-                <div>Accessibility</div>
+                <div>Dashboard</div>
             </div>
         );
     }

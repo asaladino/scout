@@ -7,7 +7,7 @@ type Props = {};
 
 type State = {};
 
-export default class BrokenLinks extends Component<Props, State> {
+export default class PwaPage extends Component<Props, State> {
     props: Props;
 
     render = () => {
@@ -15,7 +15,7 @@ export default class BrokenLinks extends Component<Props, State> {
             <div>
                 <div>toolbar</div>
                 <div>menu</div>
-                <div>BrokeLinks</div>
+                <div>Accessibility</div>
             </div>
         );
     }
