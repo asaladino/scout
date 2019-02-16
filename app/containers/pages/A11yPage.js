@@ -1,10 +1,9 @@
 // @flow
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core';
-import CssBaseline from './ScanPage';
 import TopToolbar from '../../components/TopToolbar';
 import LeftMenu from '../../components/LeftMenu';
-import A11y from "../../components/A11y";
+import A11y from '../../components/A11y';
 
 type Props = {};
 
@@ -24,7 +23,7 @@ const styles = theme => ({
 class A11yPage extends Component<Props, State> {
     props: Props;
 
-    render = () => {
+    render() {
         const { classes } = this.props;
         return (
             <div className={classes.root}>
@@ -36,7 +35,7 @@ class A11yPage extends Component<Props, State> {
                 </main>
             </div>
         );
-    };
+    }
 }
 
 export default withStyles(styles)(A11yPage);
