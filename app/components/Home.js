@@ -91,7 +91,7 @@ class Home extends Component<Props, State> {
         const { dense, secondary } = this.state;
 
         if (project.folder !== '') {
-            //return <Redirect to={routes.SCAN} />;
+            return <Redirect to={routes.DASHBOARD} />;
         }
 
         return (

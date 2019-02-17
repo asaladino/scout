@@ -8,12 +8,14 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import {
-    Dashboard,
-    LinkOff,
-    Accessibility,
-    FlashOn,
-    Scanner,
-    Settings
+    Dashboard as DashboardIcon,
+    LinkOff as BrokenLinksIcon,
+    Accessibility as A11yIcon,
+    FlashOn as SeoIcon,
+    Scanner as ScannerIcon,
+    Settings as OptionsIcon,
+    LocalPlay as BestPracticesIcon,
+    TouchApp as PwaIcon
 } from '@material-ui/icons';
 
 import Link from 'react-router-dom/es/Link';
@@ -60,40 +62,66 @@ class LeftMenu extends Component<Props, State> {
             >
                 <div className={classes.toolbar} />
                 <List>
-                    <ListItem button>
+                    <ListItem
+                        component={page === routes.DASHBOARD ? 'div' : Link}
+                        to={routes.DASHBOARD}
+                        selected={page === routes.DASHBOARD}
+                    >
                         <ListItemIcon>
-                            <Dashboard />
+                            <DashboardIcon />
                         </ListItemIcon>
                         <ListItemText primary="Dashboard" />
                     </ListItem>
                     <Divider />
-                    <ListItem button>
+                    <ListItem
+                        component={page === routes.BROKEN_LINKS ? 'div' : Link}
+                        to={routes.BROKEN_LINKS}
+                        selected={page === routes.BROKEN_LINKS}
+                    >
                         <ListItemIcon>
-                            <LinkOff />
+                            <BrokenLinksIcon />
                         </ListItemIcon>
                         <ListItemText primary="Broken Links" />
                     </ListItem>
-                    <ListItem button>
+                    <ListItem
+                        component={page === routes.A11Y ? 'div' : Link}
+                        to={routes.A11Y}
+                        selected={page === routes.A11Y}
+                    >
                         <ListItemIcon>
-                            <Accessibility />
+                            <A11yIcon />
                         </ListItemIcon>
                         <ListItemText primary="Accessibility" />
                     </ListItem>
-                    <ListItem button>
+                    <ListItem
+                        component={
+                            page === routes.BEST_PRACTICES ? 'div' : Link
+                        }
+                        to={routes.BEST_PRACTICES}
+                        selected={page === routes.BEST_PRACTICES}
+                    >
                         <ListItemIcon>
-                            <FlashOn />
+                            <BestPracticesIcon />
                         </ListItemIcon>
                         <ListItemText primary="Best Practices" />
                     </ListItem>
-                    <ListItem button>
+                    <ListItem
+                        component={page === routes.PWA ? 'div' : Link}
+                        to={routes.PWA}
+                        selected={page === routes.PWA}
+                    >
                         <ListItemIcon>
-                            <FlashOn />
+                            <PwaIcon />
                         </ListItemIcon>
                         <ListItemText primary="Progressive Web App" />
                     </ListItem>
-                    <ListItem button>
+                    <ListItem
+                        component={page === routes.SEO ? 'div' : Link}
+                        to={routes.SEO}
+                        selected={page === routes.SEO}
+                    >
                         <ListItemIcon>
-                            <FlashOn />
+                            <SeoIcon />
                         </ListItemIcon>
                         <ListItemText primary="SEO" />
                     </ListItem>
@@ -106,13 +134,17 @@ class LeftMenu extends Component<Props, State> {
                         selected={page === routes.SCAN}
                     >
                         <ListItemIcon>
-                            <Scanner />
+                            <ScannerIcon />
                         </ListItemIcon>
                         <ListItemText primary="Scan" />
                     </ListItem>
-                    <ListItem button>
+                    <ListItem
+                        component={page === routes.OPTIONS ? 'div' : Link}
+                        to={routes.OPTIONS}
+                        selected={page === routes.OPTIONS}
+                    >
                         <ListItemIcon>
-                            <Settings />
+                            <OptionsIcon />
                         </ListItemIcon>
                         <ListItemText primary="Options" />
                     </ListItem>

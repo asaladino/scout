@@ -1,9 +1,11 @@
 {
-  "HOME": "/",
-  "SETTINGS": "/settings",
-  "A11Y": "/a11y",
-  "BROKEN_LINKS": "/broken_links",
-  "DASHBOARD": "/dashboard",
-  "LIGHTHOUSE": "/lighthouse",
-  "SCAN": "/scan"
+    "HOME": "/",
+    "DASHBOARD": "/dashboard",
+    "BROKEN_LINKS": "/broken_links",
+    "A11Y": "/a11y",
+    "BEST_PRACTICES": "/best_practices",
+    "PWA": "/pwa",
+    "SEO": "/seo",
+    "SCAN": "/scan",
+    "OPTIONS": "/options"
 }

@@ -1,10 +1,9 @@
 // @flow
 import React, { Component } from 'react';
-import { withStyles } from '@material-ui/core/styles';
-
-import Scan from '../../components/Scan';
-import TopToolbar from '../../components/TopToolbar';
+import { withStyles } from '@material-ui/core';
 import LeftMenu from '../../components/LeftMenu';
+import TopToolbar from '../../components/TopToolbar';
+import Seo from '../../components/Seo';
 
 type Props = {};
 
@@ -21,10 +20,10 @@ const styles = theme => ({
     toolbar: theme.mixins.toolbar
 });
 
-class ScanPage extends Component<Props, State> {
+class SeoPage extends Component<Props, State> {
     props: Props;
 
-    render = () => {
+    render() {
         const { classes } = this.props;
         return (
             <div className={classes.root}>
@@ -32,11 +31,11 @@ class ScanPage extends Component<Props, State> {
                 <LeftMenu />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
-                    <Scan />
+                    <Seo />
                 </main>
             </div>
         );
-    };
+    }
 }
 
-export default withStyles(styles)(ScanPage);
+export default withStyles(styles)(SeoPage);

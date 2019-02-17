@@ -1,7 +1,7 @@
 {
     "name": "scout",
     "productName": "Scout",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "description": "App for indexing and analysis of a web site.",
     "scripts": {
         "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
