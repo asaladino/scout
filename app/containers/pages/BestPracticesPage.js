@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core';
 import TopToolbar from '../../components/TopToolbar';
 import LeftMenu from '../../components/LeftMenu';
+import BestPractices from '../../components/BestPractices';
 
 type Props = {};
 
@@ -30,7 +31,7 @@ class A11y extends Component<Props, State> {
                 <LeftMenu />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
-                    Best Practices
+                    <BestPractices />
                 </main>
             </div>
         );

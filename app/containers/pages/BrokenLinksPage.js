@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core';
 import TopToolbar from '../../components/TopToolbar';
 import LeftMenu from '../../components/LeftMenu';
+import BrokenLinks from '../../components/BrokenLinks';
 
 type Props = {};
 
@@ -30,7 +31,7 @@ class BrokenLinksPage extends Component<Props, State> {
                 <LeftMenu />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
-                    Broken Links
+                    <BrokenLinks />
                 </main>
             </div>
         );
