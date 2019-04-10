@@ -1,7 +1,7 @@
 {
     "name": "scout",
     "productName": "Scout",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "description": "App for indexing and analysis of a web site.",
     "scripts": {
         "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
@@ -35,8 +35,7 @@
         "test-e2e-live": "node -r @babel/register ./internals/scripts/CheckBuiltsExist.js && cross-env NODE_ENV=test testcafe-live electron:./ ./test/e2e/HomePage.e2e.js",
         "test-watch": "yarn test --watch"
     },
-    "lint-staged": {
-    },
+    "lint-staged": {},
     "main": "./app/main.prod.js",
     "build": {
         "productName": "ElectronReact",
@@ -249,6 +248,8 @@
         "electron-updater": "^4.0.6",
         "history": "^4.7.2",
         "iconv-lite": "^0.4.24",
+        "prop-types": "latest",
+        "puppeteer": "^1.14.0",
         "react": "^16.7.0",
         "react-dom": "^16.7.0",
         "react-hot-loader": "^4.6.3",
@@ -257,11 +258,10 @@
         "react-router-dom": "^4.3.1",
         "redux": "^4.0.1",
         "redux-thunk": "^2.3.0",
-        "site-index": "asaladino/site-index#v1.3.1",
-        "site-content": "asaladino/site-content#v1.3.0",
         "site-broken-links": "asaladino/site-broken-links#v1.5.0",
-        "source-map-support": "^0.5.9",
-        "prop-types": "latest"
+        "site-content": "asaladino/site-content#v1.3.0",
+        "site-index": "asaladino/site-index#v1.4.0",
+        "source-map-support": "^0.5.9"
     },
     "devEngines": {
         "node": ">=7.x",
