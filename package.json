@@ -261,6 +261,7 @@
         "site-broken-links": "asaladino/site-broken-links#v1.5.0",
         "site-content": "asaladino/site-content#v1.3.0",
         "site-index": "asaladino/site-index#v1.4.0",
+        "site-a11y": "asaladino/site-a11y#v1.4.0",
         "source-map-support": "^0.5.9"
     },
     "devEngines": {

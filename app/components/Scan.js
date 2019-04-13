@@ -17,6 +17,8 @@ import ContentArgs from "site-content/lib/Model/Args";
 import BrokenLinksController from "site-broken-links/lib/Controller/BrokenLinksController";
 import BrokenLinksArgs from "site-broken-links/lib/Model/Args";
 
+import A11yController from "site-a11y/lib/Controller/A11yController";
+import A11yArgs from "site-a11y/lib/Model/Args";
 
 import FileDetails from "site-index/lib/Model/FileDetails";
 
@@ -60,7 +62,7 @@ class Scan extends Component<Props, State> {
         super(props);
         this.state = {
             overallCompleted: 0,
-            overallTotal: 3,
+            overallTotal: 4,
             overStatus: "",
             taskCompleted: 0,
             taskTotal: 100,
@@ -69,6 +71,7 @@ class Scan extends Component<Props, State> {
         this.startIndex = this.startIndex.bind(this);
         this.startContents = this.startContents.bind(this);
         this.startBrokenLinks = this.startBrokenLinks.bind(this);
+        this.startA11y = this.startA11y.bind(this);
         this.setDomain = this.setDomain.bind(this);
     }
 
@@ -184,12 +187,56 @@ class Scan extends Component<Props, State> {
                     taskTotal: 100,
                     taskCompleted: 100
                 });
+                this.startA11y();
                 return true;
             })
             .catch((error) => {
                 console.log(error);
                 this.setState({
                     overStatus: `Error checking broken links ${domain}`
+                });
+            });
+    };
+
+    startA11y = () => {
+        const { domain, folder } = this.props.project;
+        this.setState({ overStatus: `A11y ${domain}` });
+        const args = new A11yArgs({
+            domain,
+            output: new FileDetails(folder),
+            verbose: false,
+            remote: true
+        });
+        const controller = new A11yController(args);
+        controller
+            .start((event, progress: Progress) => {
+                if (progress) {
+                    let message = { url: "" };
+                    if (progress.url !== null) {
+                        const { url } = progress;
+                        message = url;
+                    }
+                    this.setState({
+                        taskStatus: `${message.url}`,
+                        taskTotal: progress.total,
+                        taskCompleted: progress.progress
+                    });
+                }
+            })
+            .then(() => {
+                this.setState({
+                    overStatus: `Done checking a11y ${domain}`,
+                    overallCompleted: 4,
+                    taskStatus: "",
+                    taskTotal: 100,
+                    taskCompleted: 100
+                });
+                return true;
+            })
+            .catch((error) => {
+                console.log(error);
+                this.setState({
+                    overStatus: `Error checking a11y ${domain}`
                 });
             });
     };
