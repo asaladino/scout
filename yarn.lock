@@ -2187,9 +2187,9 @@ async@0.2.6:
   resolved "http://registry.npmjs.org/async/-/async-0.2.6.tgz#ad3f373d9249ae324881565582bc90e152abbd68"
   integrity sha1-rT83PZJJrjJIgVZVgryQ4VKrvWg=
 
-async@^1.5.2:
+async@^1.5.2, async@~1.5:
   version "1.5.2"
-  resolved "http://registry.npmjs.org/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
+  resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
   integrity sha1-7GphrlZIDAw8skHJVhjiCJL5Zyo=
 
 async@^2.0.0, async@^2.1.4, async@^2.5.0, async@^2.6.1:
@@ -2198,6 +2198,13 @@ async@^2.0.0, async@^2.1.4, async@^2.5.0, async@^2.6.1:
   integrity sha512-fNEiL2+AZt6AlAw/29Cr0UDe4sRAHCpEHh54WMz+Bb7QfNcFw4h3loofyJpLeQs4Yx7yuqu/2dLgM5hKOs6HlQ==
   dependencies:
     lodash "^4.17.10"
+
+async@~2.1.5:
+  version "2.1.5"
+  resolved "https://registry.yarnpkg.com/async/-/async-2.1.5.tgz#e587c68580994ac67fc56ff86d3ac56bdbe810bc"
+  integrity sha1-5YfGhYCZSsZ/xW/4bTrFa9voELw=
+  dependencies:
+    lodash "^4.14.0"
 
 asynckit@^0.4.0:
   version "0.4.0"
@@ -3065,6 +3072,15 @@ better-sqlite3@^5.2.1, better-sqlite3@^5.4.0:
   dependencies:
     integer "^2.1.0"
     tar "^4.4.6"
+
+bfj@^4.2.3:
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/bfj/-/bfj-4.2.4.tgz#85f7b23683c2afdc15860384a2d1c3fac80ed33a"
+  integrity sha1-hfeyNoPCr9wVhgOEotHD+sgO0zo=
+  dependencies:
+    check-types "^7.3.0"
+    hoopy "^0.1.2"
+    tryer "^1.0.0"
 
 bfj@^6.1.1:
   version "6.1.1"
@@ -4095,6 +4111,11 @@ commander@^2.11.0, commander@^2.14.1, commander@^2.18.0, commander@^2.8.1, comma
   version "2.19.0"
   resolved "https://registry.npmjs.org/commander/-/commander-2.19.0.tgz#f6198aa84e5b83c46054b94ddedbfed5ee9ff12a"
   integrity sha512-6tvAOO+D6OENvRAh524Dh9jcfKTYDQAqvqezbCW82xj5X0pSrcpxtvRKHLG0yBY6SD7PSDrJaj+0AiOcKVd1Xg==
+
+commander@^2.19.0:
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-2.20.0.tgz#d58bb2b5c1ee8f87b0d340027e9e94e222c5a422"
+  integrity sha512-7j2y+40w61zy6YC2iRNpUe/NwhNyoXrYpHMrSunaMG64nRnaf96zO/KMQR4OyN/UnE5KLyEBnKHd4aG3rskjpQ==
 
 commander@~2.17.1:
   version "2.17.1"
@@ -6498,6 +6519,11 @@ fragment-cache@^0.2.1:
   dependencies:
     map-cache "^0.2.2"
 
+freeport@~1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/freeport/-/freeport-1.0.5.tgz#255e8ab84170c33ba85d990e821ae5f4a1a9bc5d"
+  integrity sha1-JV6KuEFwwzuoXZkOghrl9KGpvF0=
+
 fresh@0.5.2:
   version "0.5.2"
   resolved "https://registry.npmjs.org/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
@@ -7098,6 +7124,13 @@ has@^1.0.0, has@^1.0.1, has@^1.0.3:
   dependencies:
     function-bind "^1.1.1"
 
+hasbin@~1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/hasbin/-/hasbin-1.2.3.tgz#78c5926893c80215c2b568ae1fd3fcab7a2696b0"
+  integrity sha1-eMWSaJPIAhXCtWiuH9P8q3omlrA=
+  dependencies:
+    async "~1.5"
+
 hash-base@^3.0.0:
   version "3.0.4"
   resolved "https://registry.npmjs.org/hash-base/-/hash-base-3.0.4.tgz#5fc8686847ecd73499403319a6b0a3f3f6ae4918"
@@ -7152,6 +7185,14 @@ hmac-drbg@^1.0.0:
     hash.js "^1.0.3"
     minimalistic-assert "^1.0.0"
     minimalistic-crypto-utils "^1.0.1"
+
+hogan.js@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/hogan.js/-/hogan.js-3.0.2.tgz#4cd9e1abd4294146e7679e41d7898732b02c7bfd"
+  integrity sha1-TNnhq9QpQUbnZ55B14mHMrAse/0=
+  dependencies:
+    mkdirp "0.3.0"
+    nopt "1.0.10"
 
 hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
   version "2.5.5"
@@ -8092,6 +8133,11 @@ is-wsl@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/is-wsl/-/is-wsl-1.1.0.tgz#1f16e4aa22b04d1336b66188a66af3c600c3a66d"
   integrity sha1-HxbkqiKwTRM2tmGIpmrzxgDDpm0=
+
+is@^3.2.1:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/is/-/is-3.3.0.tgz#61cff6dd3c4193db94a3d62582072b44e5645d79"
+  integrity sha512-nW24QBoPcFGGHJGUwnfpI7Yc5CdqWNdsyHQszVE/z2pKHXzh7FZ5GWhJqSyaQ9wMkQnsTx+kAI8bHlCX4tKdbg==
 
 isarray@0.0.1:
   version "0.0.1"
@@ -9703,6 +9749,11 @@ mixin-object@^2.0.1:
     for-in "^0.1.3"
     is-extendable "^0.1.1"
 
+mkdirp@0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.3.0.tgz#1bbf5ab1ba827af23575143490426455f481fe1e"
+  integrity sha1-G79asbqCevI1dRQ0kEJkVfSB/h4=
+
 mkdirp@0.5.1, mkdirp@0.5.x, "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@~0.5.1:
   version "0.5.1"
   resolved "http://registry.npmjs.org/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
@@ -9952,6 +10003,13 @@ node-notifier@^5.2.1:
     shellwords "^0.1.1"
     which "^1.3.0"
 
+node-phantom-simple@~2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/node-phantom-simple/-/node-phantom-simple-2.2.4.tgz#4fc4effbb02f241fb5082bd4fbab398e4aecb64d"
+  integrity sha1-T8Tv+7AvJB+1CCvU+6s5jkrstk0=
+  dependencies:
+    debug "^2.2.0"
+
 node-pre-gyp@^0.10.0:
   version "0.10.3"
   resolved "https://registry.npmjs.org/node-pre-gyp/-/node-pre-gyp-0.10.3.tgz#3070040716afdc778747b61b6887bf78880b80fc"
@@ -10005,6 +10063,22 @@ node-version@^1.0.0:
   resolved "https://registry.npmjs.org/node-version/-/node-version-1.2.0.tgz#34fde3ffa8e1149bd323983479dda620e1b5060d"
   integrity sha512-ma6oU4Sk0qOoKEAymVoTvk8EdXEobdS7m/mAGhDJ8Rouugho48crHBORAmy5BoOcv8wraPM6xumapQp5hl4iIQ==
 
+node.extend@^2.0.0:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/node.extend/-/node.extend-2.0.2.tgz#b4404525494acc99740f3703c496b7d5182cc6cc"
+  integrity sha512-pDT4Dchl94/+kkgdwyS2PauDFjZG0Hk0IcHIB+LkW27HLDtdoeMxHTxZh39DYbPP8UflWXWj9JcdDozF+YDOpQ==
+  dependencies:
+    has "^1.0.3"
+    is "^3.2.1"
+
+node.extend@~1.1.6:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/node.extend/-/node.extend-1.1.8.tgz#0aab3e63789f4e6d68b42bc00073ad1881243cf0"
+  integrity sha512-L/dvEBwyg3UowwqOUTyDsGBU6kjBQOpOhshio9V3i3BMPv5YUb9+mWNN8MK0IbWqT0AqaTSONZf0aTuMMahWgA==
+  dependencies:
+    has "^1.0.3"
+    is "^3.2.1"
+
 nomnom@~1.6.2:
   version "1.6.2"
   resolved "https://registry.npmjs.org/nomnom/-/nomnom-1.6.2.tgz#84a66a260174408fc5b77a18f888eccc44fb6971"
@@ -10012,6 +10086,13 @@ nomnom@~1.6.2:
   dependencies:
     colors "0.5.x"
     underscore "~1.4.4"
+
+nopt@1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/nopt/-/nopt-1.0.10.tgz#6ddd21bd2a31417b92727dd585f8a6f37608ebee"
+  integrity sha1-bd0hvSoxQXuScn3Vhfim83YI6+4=
+  dependencies:
+    abbrev "1"
 
 "nopt@2 || 3":
   version "3.0.6"
@@ -10469,6 +10550,13 @@ p-timeout@^1.1.1:
   dependencies:
     p-finally "^1.0.0"
 
+p-timeout@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/p-timeout/-/p-timeout-2.0.1.tgz#d8dd1979595d2dc0139e1fe46b8b646cb3cdf038"
+  integrity sha512-88em58dDVB/KzPEx1X0N3LwFfYZPyDc4B6eF38M1rk9VTZMbxXXgjugz8mmwpS9Ox4BDZ+t6t3QP5+/gazweIA==
+  dependencies:
+    p-finally "^1.0.0"
+
 p-try@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/p-try/-/p-try-1.0.0.tgz#cbc79cdbaf8fd4228e13f621f2b1a237c1b207b3"
@@ -10478,6 +10566,47 @@ p-try@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/p-try/-/p-try-2.0.0.tgz#85080bb87c64688fa47996fe8f7dfbe8211760b1"
   integrity sha512-hMp0onDKIajHfIkdRk3P4CdCmErkYAxxDtP3Wx/4nZ3aGlau2VKh3mZpcuFkH27WQkL/3WBCPOktzA9ZOAnMQQ==
+
+pa11y-reporter-cli@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/pa11y-reporter-cli/-/pa11y-reporter-cli-1.0.1.tgz#a3d47c98d328e1709f419abf322013ef9bdbf4e3"
+  integrity sha512-k+XPl5pBU2R1J6iagGv/GpN/dP7z2cX9WXqO0ALpBwHlHN3ZSukcHCOhuLMmkOZNvufwsvobaF5mnaZxT70YyA==
+  dependencies:
+    chalk "^2.1.0"
+
+pa11y-reporter-csv@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/pa11y-reporter-csv/-/pa11y-reporter-csv-1.0.0.tgz#c19a99e41c14d82669a1dfd907ada7269d423b98"
+  integrity sha512-S2gFgbAvONBzAVsVbF8zsYabszrzj7SKhQxrEbw19zF0OFI8wCWn8dFywujYYkg674rmyjweSxSdD+kHTcx4qA==
+
+pa11y-reporter-html@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/pa11y-reporter-html/-/pa11y-reporter-html-1.0.0.tgz#6c77b99cb612cd9abe621af6fa9177045f644673"
+  integrity sha512-xF4TQVyDgVCtfIlYBAjvEnbTfoolKPu7AfAHD67mbiqjkdw2D28av1O62s2DcW1ho8Gb1aFZT1iFeP4HSs8SeQ==
+  dependencies:
+    hogan.js "^3.0.2"
+
+pa11y-reporter-json@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/pa11y-reporter-json/-/pa11y-reporter-json-1.0.0.tgz#5762959eeea89cc451a2e1160aa0526280ebfe29"
+  integrity sha512-EdLrzh1hyZ8DudCSSrcakgtsHDiSsYNsWLSoEAo1JnFTIK8hYpD7vL+xgd0u+LXDxz9wLLFnckdubpklaRpl/w==
+  dependencies:
+    bfj "^4.2.3"
+
+pa11y@5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/pa11y/-/pa11y-5.1.0.tgz#ea57c256b669db2d3999e25a7879dca97051a60d"
+  integrity sha512-JoHEEiaamh2dp4Vz/5awOiLMF5nvcEBncrQdPqrv9UbOhkYqG2r16vALiwo30JOcGpaaxCNR7I02VdQ7PxAgCQ==
+  dependencies:
+    commander "^2.19.0"
+    fs-extra "^5.0.0"
+    node.extend "^2.0.0"
+    p-timeout "^2.0.1"
+    pa11y-reporter-cli "^1.0.1"
+    pa11y-reporter-csv "^1.0.0"
+    pa11y-reporter-json "^1.0.0"
+    puppeteer "^1.9.0"
+    semver "^5.6.0"
 
 package-json@^4.0.0:
   version "4.0.1"
@@ -11484,7 +11613,7 @@ punycode@^2.1.0:
   resolved "https://registry.npmjs.org/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   integrity sha512-XRsRjdf+j5ml+y/6GKHPZbrF/8p2Yga0JPtdqTIY2Xe5ohJPD9saDJJLPvp9+NSBprVvevdXZybnj2cv8OEd0A==
 
-puppeteer@^1.14.0:
+puppeteer@^1.14.0, puppeteer@^1.9.0:
   version "1.14.0"
   resolved "https://registry.yarnpkg.com/puppeteer/-/puppeteer-1.14.0.tgz#828c1926b307200d5fc8289b99df4e13e962d339"
   integrity sha512-SayS2wUX/8LF8Yo2Rkpc5nkAu4Jg3qu+OLTDSOZtisVQMB2Z5vjlY2TdPi/5CgZKiZroYIiyUN3sRX63El9iaw==
@@ -12724,6 +12853,17 @@ sisteransi@^0.1.1:
   version "0.1.1"
   resolved "https://registry.npmjs.org/sisteransi/-/sisteransi-0.1.1.tgz#5431447d5f7d1675aac667ccd0b865a4994cb3ce"
   integrity sha512-PmGOd02bM9YO5ifxpw36nrNMBTptEtfRl4qUYl9SndkolplkrZZOW7PGHjrZL53QvMVj9nQ+TKqUnRsw4tJa4g==
+
+site-a11y@asaladino/site-a11y#v1.4.0:
+  version "1.4.0"
+  resolved "https://codeload.github.com/asaladino/site-a11y/tar.gz/83499303311113be7c5f30abe3af56913e861936"
+  dependencies:
+    command-line-args "^4.0.7"
+    command-line-usage "^4.0.2"
+    pa11y "5.1.0"
+    pa11y-reporter-html "^1.0.0"
+    truffler latest
+    winston "^3.0.0-rc5"
 
 site-broken-links@asaladino/site-broken-links#v1.5.0:
   version "1.5.0"
@@ -14028,6 +14168,17 @@ trough@^1.0.0:
   integrity sha512-m6s2OdQe5wgpFMC+pAJ+q9djG82O2jcHPOI6RNg1yy9rCYR+WD6Nbpl32fDpfC56nirdRy+opFa/Vk7HYhqaew==
   dependencies:
     glob "^7.1.2"
+
+truffler@latest:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/truffler/-/truffler-3.1.0.tgz#c6e486f802b1e479d59eef95a5a1ed0728264f90"
+  integrity sha1-xuSG+AKx5HnVnu+VpaHtBygmT5A=
+  dependencies:
+    async "~2.1.5"
+    freeport "~1.0.5"
+    hasbin "~1.2.3"
+    node-phantom-simple "~2.2.4"
+    node.extend "~1.1.6"
 
 truncate-utf8-bytes@^1.0.0:
   version "1.0.2"
