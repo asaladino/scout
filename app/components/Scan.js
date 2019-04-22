@@ -20,6 +20,9 @@ import BrokenLinksArgs from "site-broken-links/lib/Model/Args";
 import A11yController from "site-a11y/lib/Controller/A11yController";
 import A11yArgs from "site-a11y/lib/Model/Args";
 
+import LighthouseController from "site-lighthouse/lib/Controller/LighthouseController";
+import LighthouseArgs from "site-lighthouse/lib/Model/Args";
+
 import FileDetails from "site-index/lib/Model/FileDetails";
 
 import { connect } from "react-redux";
@@ -62,7 +65,7 @@ class Scan extends Component<Props, State> {
         super(props);
         this.state = {
             overallCompleted: 0,
-            overallTotal: 4,
+            overallTotal: 5,
             overStatus: "",
             taskCompleted: 0,
             taskTotal: 100,
@@ -231,6 +234,7 @@ class Scan extends Component<Props, State> {
                     taskTotal: 100,
                     taskCompleted: 100
                 });
+                this.startLighthouse();
                 return true;
             })
             .catch((error) => {
@@ -241,10 +245,50 @@ class Scan extends Component<Props, State> {
             });
     };
 
-    setDomain = (event: Event) => {
-        this.setState({
-            domain: event.target.value
+    startLighthouse = () => {
+        const { domain, folder } = this.props.project;
+        this.setState({ overStatus: `Lighthouse ${domain}` });
+        const args = new LighthouseArgs({
+            domain,
+            output: new FileDetails(folder),
+            verbose: false
         });
+        const controller = new LighthouseController(args);
+        controller
+            .start((event, progress: Progress) => {
+                if (progress) {
+                    let message = { url: "" };
+                    if (progress.url !== null) {
+                        const { url } = progress;
+                        message = url;
+                    }
+                    this.setState({
+                        taskStatus: `${message.url}`,
+                        taskTotal: progress.total,
+                        taskCompleted: progress.progress
+                    });
+                }
+            })
+            .then(() => {
+                this.setState({
+                    overStatus: `Done checking lighthouse ${domain}`,
+                    overallCompleted: 5,
+                    taskStatus: "",
+                    taskTotal: 100,
+                    taskCompleted: 100
+                });
+                return true;
+            })
+            .catch((error) => {
+                console.log(error);
+                this.setState({
+                    overStatus: `Error checking lighthouse ${domain}`
+                });
+            });
+    };
+
+    setDomain = (event: Event) => {
+        this.setState({ domain: event.target.value });
     };
 
     render = () => {
